@@ -1,3 +1,4 @@
 "use strict"
 
-console.log('hihinpm')
+console.log('hi')
+console.log('bye')
