@@ -18,6 +18,15 @@ function login(){
         body: JSON.stringify(req)
     })
         .then((res)=>res.json())
-        .then((res)=>console.log(res))
+        .then((res)=>{
+            if(res.success){
+                location.href="/"
+            }else{
+                alert(res.message)
+            }}
+            
+        ).catch((err)=>{
+            console.error(new Error("로그인중 에러"))
+        })
 
 }
