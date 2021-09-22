@@ -25,6 +25,7 @@ const process = {
   },
 
   register: (req, res) => {
+    console.log('click')
     const user = new User(req.body)
     const response = user.register()
     //console.log('/////-ccd', response)

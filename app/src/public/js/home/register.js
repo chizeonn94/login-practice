@@ -23,17 +23,20 @@ function register() {
         },
         body: JSON.stringify(req)
     })
-        .then((res) => res.json())
         .then((res) => {
-            if (res.success) {
-                location.href = "/login"
-            } else {
-                alert(res.message)
-            }
-        }
-
-        ).catch((err) => {
+            console.log(res)
+            //return res.json()
+        })
+        // .then((res) => {
+        //     if (res.success) {
+        //         location.href = "/login"
+        //     } else {
+        //         alert(res.message)
+        //     }
+        // })
+        .catch((err) => {
             console.error(new Error("회원가입중 에러"))
+            console.log(err)
         })
 
 }

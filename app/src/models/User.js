@@ -24,6 +24,7 @@ class User {
     }
 
     register() {
+        console.log('register')
         const client = this.body
         UserStorage.save(client)
     }

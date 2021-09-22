@@ -44,6 +44,11 @@ class UserStorage {
             .catch((err) => console.log(err))
     }
 
+    static save(userInfo) {
+        const data = 'a'
+        fs.writeFile("./src/databases/users.json", data)
+
+    }
 
 
 }
