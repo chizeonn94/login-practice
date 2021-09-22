@@ -1,15 +1,12 @@
 "use strict"
 
+const fs = require("fs")
 class UserStorage {
-    static #users = {
-        id: ["a123", "b123", "c123"],
-        name: ["lea", "chris", "josh"],
-        psword: ["1234", "aaa", "jjj"]
-    }
+
 
     static getUsers(...fields) {
         console.log(fields)
-        const users = this.#users
+        //const users = this.#users
         const newUsers = fields.reduce((newUsers, field) => {
             if (users.hasOwnProperty(field)) {
                 newUsers[field] = users[field]
@@ -21,21 +18,32 @@ class UserStorage {
     }
 
     static getUserInfo(id) {
-        const keys = Object.keys(this.#users)
-        const idx = this.#users.id.indexOf(id)
-        console.log('idx >>> ', idx)
-        const UserInfo = keys.reduce((previous, current) => {
-            console.log('current', current)
-            console.log('previous', previous)
 
-            previous[current] = this.#users[current][idx]
+        //const users = this.#users
 
-            return previous
+        fs.readFile("./src/databases/users.json", (err, data) => {
+            if (err) throw err;
+            console.log(JSON.parse(data))
+            const users = JSON.parse(data)
+            const keys = Object.keys(users)
+            const idx = users.id.indexOf(id)
+            console.log('idx >>> ', idx)
+            const UserInfo = keys.reduce((previous, current) => {
+                //console.log('current', current)
+                //console.log('previous', previous)
 
-        }, {})
-        console.log(UserInfo)
-        return UserInfo
+                //previous[current] = this.#users[current][idx]
+
+                return previous
+
+            }, {})
+            console.log(UserInfo)
+            return UserInfo
+        })
+
     }
+
+
 }
 
 module.exports = UserStorage
