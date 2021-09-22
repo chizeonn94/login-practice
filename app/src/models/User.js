@@ -8,14 +8,20 @@ class User {
     }
 
     login() {
-        const { id, psword } = UserStorage.getUserInfo(this.body.id)
+        const client = this.body
+        const { id, psword } = UserStorage.getUserInfo(client.id)
         if (id) {
-            if (id === this.body.id && psword === this.body.psword) {
+            if (id === client.id && psword === client.psword) {
                 return { success: true }
             }
             return { success: false, message: '비밀번호가 틀렸습니다.' }
         }
         return { success: false, message: '존재하지않는 아이디 입니다.' }
+    }
+
+    register() {
+        const client = this.body
+        UserStorage.save(client)
     }
 }
 
