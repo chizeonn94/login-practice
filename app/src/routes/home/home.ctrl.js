@@ -17,17 +17,17 @@ const output = {
 }
 
 const process = {
-  login: (req, res) => {
+  login: async (req, res) => {
     const user = new User(req.body)
-    const response = user.login()
+    const response = await user.login()
     console.log('/////-ccd', response)
     return res.json(response)
   },
 
   register: (req, res) => {
     const user = new User(req.body)
-    const response = user.login()
-    console.log('/////-ccd', response)
+    const response = user.register()
+    //console.log('/////-ccd', response)
     return res.json(response)
   },
 }

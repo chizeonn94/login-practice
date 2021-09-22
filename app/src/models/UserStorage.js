@@ -1,8 +1,28 @@
 "use strict"
 
-const fs = require("fs")
+const fs = require("fs").promises
 class UserStorage {
+    static #getUserInfo(data, id) {
 
+        return fs.readFile("./src/databases/users.json")
+            .then((res) => {
+                const users = JSON.parse(data)
+                const keys = Object.keys(users)
+                const idx = users.id.indexOf(id)
+                //console.log('idx >>> ', idx)
+                const UserInfo = keys.reduce((previous, current) => {
+                    // console.log('current', current)
+                    // console.log('previous', previous)
+
+                    previous[current] = users[current][idx]
+
+                    return previous
+
+                }, {})
+                return UserInfo
+            })
+            .catch((err) => console.log(err))
+    }
 
     static getUsers(...fields) {
         console.log(fields)
@@ -19,29 +39,11 @@ class UserStorage {
 
     static getUserInfo(id) {
 
-        //const users = this.#users
-
-        fs.readFile("./src/databases/users.json", (err, data) => {
-            if (err) throw err;
-            console.log(JSON.parse(data))
-            const users = JSON.parse(data)
-            const keys = Object.keys(users)
-            const idx = users.id.indexOf(id)
-            console.log('idx >>> ', idx)
-            const UserInfo = keys.reduce((previous, current) => {
-                //console.log('current', current)
-                //console.log('previous', previous)
-
-                //previous[current] = this.#users[current][idx]
-
-                return previous
-
-            }, {})
-            console.log(UserInfo)
-            return UserInfo
-        })
-
+        return fs.readFile("./src/databases/users.json")
+            .then((res) => this.#getUserInfo(res, id))
+            .catch((err) => console.log(err))
     }
+
 
 
 }
