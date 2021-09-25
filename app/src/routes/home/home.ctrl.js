@@ -1,7 +1,7 @@
 "use strict";
 
-const UserStorage = require("../../models/UserStorage")
-const User = require("../../models/User")
+const UserStorage = require("../../models/UserStorage");
+const User = require("../../models/User");
 const output = {
   home: (req, res) => {
     res.render("home/index");
@@ -12,27 +12,26 @@ const output = {
   },
 
   register: (req, res) => {
-    res.render("home/register")
-  }
-}
+    res.render("home/register");
+  },
+};
 
 const process = {
   login: async (req, res) => {
-    const user = new User(req.body)
-    const response = await user.login()
-    console.log('/////-ccd', response)
-    return res.json(response)
+    const user = new User(req.body);
+    const response = await user.login();
+    console.log("/////-ccd", response);
+    return res.json(response);
   },
 
-  register: (req, res) => {
-    console.log('click')
-    const user = new User(req.body)
-    const response = user.register()
+  register: async (req, res) => {
+    console.log("click");
+    const user = new User(req.body);
+    const response = await user.register();
     //console.log('/////-ccd', response)
-    return res.json(response)
+    return res.json(response);
   },
-}
-
+};
 
 module.exports = {
   output,
